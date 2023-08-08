@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/task.service';
 })
 export class NewTaskComponent implements OnInit{
 
-  listId!: string
+  listId!: string;
 
   constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) {
     
@@ -27,11 +27,14 @@ export class NewTaskComponent implements OnInit{
   }
 
   createTask(title: string) {
+    console.log('Ovo je listId ' + this.listId);
     this.taskService.createTask(title, this.listId).subscribe(next=>{
       const task: Task = next as Task;
       console.log(task);
       this.router.navigate(['../'], {relativeTo: this.route});
-    })
+    });
+
+    
   }
 
 }

@@ -71,24 +71,20 @@ app.delete('/lists/:id', (req, res) =>{
 
 //GET /lists/:listId/tasks to get all tasks from a specific list
 app.get('/lists/:listId/tasks', (req, res) => {
-    //res.send("Hello World!");
-        // We want to return an array of all the lists in the database
-        Task.find({
-            _listId: req.params.listId
-        }).then((tasks) => {
-            res.send(tasks);
-        });
+    Task.find({
+        _listId: req.params.listId // Use req.params.listId instead of req.params._listId
+    }).then((tasks) => {
+        res.send(tasks);
+    });
 });
 
 app.get('/lists/:listId/tasks/:taskId', (req, res) => {
-    //res.send("Hello World!");
-        // We want to return an array of all the lists in the database
-        Task.findOne({
-            _id: req.params.taskId,
-            _listId: req.params.listId
-        }).then((task) => {
-            res.send(task);
-        });
+    Task.findOne({
+        _id: req.params.taskId, // Use req.params.taskId instead of req.params._id
+        _listId: req.params.listId
+    }).then((task) => {
+        res.send(task);
+    });
 });
 
 //POST /lists/:listId/tasks to create a new task in a specific list
@@ -106,7 +102,7 @@ app.post('/lists/:listId/tasks', (req, res) => {
 
 //PATCH /lists/:listId/tasks/taskId to update an existing task specified by task id
 app.patch('/lists/:listId/tasks/:taskId', (req, res) => {
-    Task.findOneAndUpdate({_id: req.params.taskId , _listId: req.params.listId
+    Task.findOneAndUpdate({_id: req.params.taskId , _listId: req.params._listId
     }, {
         $set: req.body
     }

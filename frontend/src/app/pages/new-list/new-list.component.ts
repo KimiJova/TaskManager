@@ -17,7 +17,7 @@ export class NewListComponent implements OnInit{
 
   }
 
-  createList(title:  string) {
+  createList(title: string) {
     this.taskService.createList(title).subscribe(next=>{
       const list: List = next as List;
       console.log(list);

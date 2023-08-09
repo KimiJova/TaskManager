@@ -14,6 +14,7 @@ const {List, Task} = require('./db/models');
 //CORS HEADER MIDDLEWARE
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:4200"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
@@ -102,12 +103,12 @@ app.post('/lists/:listId/tasks', (req, res) => {
 
 //PATCH /lists/:listId/tasks/taskId to update an existing task specified by task id
 app.patch('/lists/:listId/tasks/:taskId', (req, res) => {
-    Task.findOneAndUpdate({_id: req.params.taskId , _listId: req.params._listId
+    Task.findOneAndUpdate({_id: req.params.taskId , _listId: req.params.listId
     }, {
         $set: req.body
     }
     ).then(()=>{
-        res.sendStatus(200);
+        res.send({message: "Updated successfully"})
     })
 });
 
@@ -115,7 +116,7 @@ app.patch('/lists/:listId/tasks/:taskId', (req, res) => {
 app.delete('/lists/:listId/tasks/:taskId', (req, res)=> {
     Task.findOneAndRemove({
         _id: req.params.taskId,
-        _listId: req.params._listId
+        _listId: req.params.listId
     }).then((removedTaskDoc) => {
         res.send(removedTaskDoc);
     })

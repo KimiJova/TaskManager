@@ -21,7 +21,7 @@
             </h1>
 
             <!-- Task Elements -->
-            <div class="task" *ngFor="let task of tasks">
+            <div class="task" *ngFor="let task of tasks" (click) = "onTaskClick(task)" [ngClass]="{ 'completed': task.completed }">
                 <p>{{ task.title }}</p>
             </div>
 
@@ -29,7 +29,7 @@
                 <p>No tasks found.</p>
             </div> -->
             
-            <button class="circle-add-button button is-primary">
+            <button class="circle-add-button button is-primary" routerLink="./new-task">
                 <img src="../../../assets/plus-icon.svg">
             </button>
 

@@ -97,3 +97,8 @@
     position: absolute;
     border-radius: 50%;
 }
+
+.task-list {
+    max-height: 500px; /* Adjust the height as needed */
+    overflow: auto;
+  }

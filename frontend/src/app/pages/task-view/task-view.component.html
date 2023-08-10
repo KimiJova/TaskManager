@@ -20,15 +20,12 @@
                 Tasks
             </h1>
 
+            <div class="task-list" id="taskList">
             <!-- Task Elements -->
-            <div class="task" *ngFor="let task of tasks" (click) = "onTaskClick(task)" [ngClass]="{ 'completed': task.completed }">
-                <p>{{ task.title }}</p>
+                <div class="task" *ngFor="let task of tasks" (click) = "onTaskClick(task)" [ngClass]="{ 'completed': task.completed }">
+                    <p>{{ task.title }}</p>
+                </div>
             </div>
-
-            <!-- <div *ngIf="tasks.length === 0">
-                <p>No tasks found.</p>
-            </div> -->
-            
             <button class="circle-add-button button is-primary" routerLink="./new-task">
                 <img src="../../../assets/plus-icon.svg">
             </button>

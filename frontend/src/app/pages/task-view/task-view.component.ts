@@ -11,24 +11,32 @@ import { TaskService } from 'src/app/task.service';
 })
 export class TaskViewComponent implements OnInit {
 
-  lists: List[] = [];
-  tasks: Task[] = [];
+  lists: any;
+  tasks: any;
+  selectedListId: any;
   constructor(private taskService: TaskService, private route: ActivatedRoute) { }
 
-  ngOnInit(){
-    this.route.params.subscribe(
-      (params: Params) => {
-        const listId = params['listId'];
-        this.taskService.getTasks(listId).subscribe((tasks: any)=>{
+  ngOnInit() {
+    console.log('TaskViewComponent initialized');
+  
+    this.route.params.subscribe((params: Params) => {
+      this.selectedListId = params['listId'];
+  
+      if (this.selectedListId) {
+        console.log('Fetching tasks for list:', this.selectedListId);
+        this.taskService.getTasks(this.selectedListId).subscribe((tasks: any) => {
           this.tasks = tasks;
-        })
+          console.log('Fetched tasks:', this.tasks);
+        });
       }
-    )
-
-    this.taskService.getLists().subscribe((lists: any)=>{
-      this.lists = lists;
-    })
+  
+      this.taskService.getLists().subscribe((lists: any) => {
+        this.lists = lists;
+        console.log('Fetched lists:', this.lists);
+      });
+    });
   }
+  
 
   onTaskClick(task: Task)  {
     //We want to set the task to completed

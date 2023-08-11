@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap'); //font Lora
 
+
 /* CSS HEX */
 $white-smoke: #f6f4f4ff;
 $malachite: #10db3dff;
@@ -75,4 +76,11 @@ html,body{
     background: white;
     border-radius: 5px;
     padding: 35px;
+}
+
+.title{
+    font-family: 'Lora';
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }

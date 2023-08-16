@@ -40,6 +40,19 @@ export class AuthService {
     this.router.navigateByUrl("/login");
   }
 
+  signup(email: string, password: string) {
+    return this.webService.signup(email, password).pipe(
+      shareReplay(),
+      tap((res: HttpResponse<any>) => {
+          // The auth token will be in the header of this response
+          const accessToken = res.headers.get('x-access-token') ?? ''; // Use an empty string as default
+          const refreshToken = res.headers.get('x-refresh-token') ?? ''; // Use an empty string as default
+          this.setSession(res.body._id, accessToken, refreshToken);
+          console.log("Successfully signed up and now logged in!");
+      })
+  );
+  }
+
   getAccessToken() {
     return localStorage.getItem('x-access-token');
   }

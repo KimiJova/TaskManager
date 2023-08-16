@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:4200"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
 
     res.header("Access-Control-Expose-Headers", "x-access-token, x-refresh-token");
     next();
@@ -113,7 +113,7 @@ app.get('/lists', authenticate, (req, res) => {
 
 //POST /lists to create lists
 app.post('/lists', authenticate, (req, res) => {
-    //We want to create a new lis and return the new list doucemnt back to the user which includes the id
+    //We want to create a new list and return the new list doucemnt back to the user which includes the id
     //the list info will be passed in via the JSON request body
     let title = req.body.title;
 
@@ -334,7 +334,7 @@ let deleteTasksFromLists = (_listId) => {
     Task.deleteMany({
         _listId
     }).then(() => {
-        console.log("Task from " + _listId + " where deleted")
+        console.log("Task from " + _listId + " where deleted");
     })
 }
 

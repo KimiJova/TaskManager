@@ -65,6 +65,14 @@ export class TaskViewComponent implements OnInit {
     });
   }
 
+  onDeleteTaskClick(id: string) {
+    this.taskService.deleteTask(this.selectedListId, id).subscribe((res: any)=>{
+      //this.router.navigate(['/lists'])
+      this.tasks = this.tasks.filter((val: { _id: string; }) => val._id !== id);
+      console.log(res)
+    });
+  }
+
   
 
 }

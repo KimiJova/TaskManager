@@ -14,6 +14,10 @@ export class TaskService {
     return this.webReqService.post(`lists/${listId}/tasks`, { title });
   }
 
+  updateTask(listId: string, taskId: string, title: string) {
+    return this.webReqService.patch(`lists/${listId}/tasks/${taskId}`, { title });
+  }
+
   createList(title: string) {
     //We want to send a web request to create a list
     return this.webReqService.post('lists', { title });
@@ -26,6 +30,10 @@ export class TaskService {
 
   deleteList(id: string) {
     return this.webReqService.delete(`lists/${id}`);
+  }
+
+  deleteTask(listId: string, taskId: string) {
+    return this.webReqService.delete(`lists/${listId}/tasks/${taskId}`);
   }
 
   getLists() {

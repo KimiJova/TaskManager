@@ -20,6 +20,7 @@ $white-smoke: #f6f4f4ff;
 $malachite: #10db3dff;
 $erin: #00f549ff;
 $smoky-black: #0d0709ff;
+$turqoise: #30D5C8;
 
 /* SCSS HSL */
 $white-smoke: hsla(0, 10%, 96%, 1);
@@ -46,7 +47,7 @@ $gradient-radial: radial-gradient(#f6f4f4ff, #10db3dff, #00f549ff, #0d0709ff);
 
 $family-sans-serif: "Lora", sans-serif;
 $primary: $malachite;
-$link:$erin;
+$link: $turqoise;
 
 //apdejtovanje bulminih varijabli
 $control-border-width: 2px;
@@ -89,4 +90,6 @@ html,body{
     padding: 35px;
     background: white;
     border-radius: 5px;
+    width: 350px;
+    max-width: 350px;
 }

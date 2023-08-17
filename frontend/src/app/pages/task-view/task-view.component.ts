@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { List } from 'src/app/models/list.model';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/task.service';
@@ -15,7 +15,8 @@ export class TaskViewComponent implements OnInit {
   tasks: any;
   selectedListId: any;
   
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private elRef: ElementRef) { }
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private elRef: ElementRef, 
+    private router: Router) { }
 
   ngOnInit() {
     console.log('TaskViewComponent initialized');
@@ -54,6 +55,13 @@ export class TaskViewComponent implements OnInit {
       console.log("Completed successfully");
       // the task has been set to completed successfully
       task.completed = !task.completed;
+    });
+  }
+
+  onDeleteListClick() {
+    this.taskService.deleteList(this.selectedListId).subscribe((res: any)=>{
+      this.router.navigate(['/lists'])
+      console.log(res)
     });
   }
 

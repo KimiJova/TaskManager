@@ -5,12 +5,14 @@ import { NewListComponent } from './pages/new-list/new-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { EditListComponent } from './pages/edit-list/edit-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'lists', pathMatch: 'full' },
   { path: 'new-list', component: NewListComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupPageComponent },
+  { path: 'edit-list/:listId', component: EditListComponent },
   { path: 'lists/:listId/new-task', component: NewTaskComponent },
   { path: 'lists/:listId', component: TaskViewComponent },
   { path: 'lists', component: TaskViewComponent },

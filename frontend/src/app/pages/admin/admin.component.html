@@ -1,0 +1,33 @@
+<div class="centered-content">
+    <div class="white-box is-large">
+      <h1 class="title has-text-primary">Admin Panel</h1>
+  
+      <div *ngIf="users?.length; else noUsers"  class="has-text-centered">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user._id }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <button class="button is-danger is-small" (click)="deleteUser(user._id)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <ng-template #noUsers>
+        <p class="has-text-centered">No users found.</p>
+      </ng-template>
+    </div>
+  </div>
+  

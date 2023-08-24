@@ -46,4 +46,12 @@ export class WebRequestService {
       observe: 'response' 
     });
   }
+
+  getUsers() {
+    return this.get('admin/users');
+  }
+
+  deleteUser(userId: string) {
+    return this.delete(`admin/users/${userId}`);
+  }
 }

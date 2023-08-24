@@ -7,9 +7,13 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { EditListComponent } from './pages/edit-list/edit-list.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { adminGuard } from './admin.guard';
+
+
 
 const routes: Routes = [
-  { path: '', redirectTo: 'lists', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'new-list', component: NewListComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupPageComponent },
@@ -18,9 +22,8 @@ const routes: Routes = [
   { path: 'lists/:listId/edit-task/:taskId', component: EditTaskComponent },
   { path: 'lists/:listId', component: TaskViewComponent },
   { path: 'lists', component: TaskViewComponent },
-  
+  { path: 'admin', component: AdminComponent}
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

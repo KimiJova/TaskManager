@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { WebRequestService } from './web-request.service';
 import { Router } from '@angular/router';
 import { shareReplay, tap } from 'rxjs';
+//import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  
   constructor(private webService: WebRequestService, private router: Router, private http: HttpClient) { }
 
   // login(email: string, password: string) {
@@ -22,17 +23,17 @@ export class AuthService {
   // }
 
   login(email: string, password: string) {
-     return this.webService.login(email, password).pipe(
+    return this.webService.login(email, password).pipe(
         shareReplay(),
         tap((res: HttpResponse<any>) => {
             // The auth token will be in the header of this response
-            const accessToken = res.headers.get('x-access-token') ?? ''; // Use an empty string as default
-            const refreshToken = res.headers.get('x-refresh-token') ?? ''; // Use an empty string as default
+            const accessToken = res.headers.get('x-access-token') ?? '';
+            const refreshToken = res.headers.get('x-refresh-token') ?? '';
             this.setSession(res.body._id, accessToken, refreshToken);
             console.log("Logged in!");
         })
     );
-  }
+}
 
   logout() {
     this.removeSession();
@@ -68,7 +69,6 @@ export class AuthService {
   getUserId() {
     return localStorage.getItem('user-id');
   }
-
 
   private setSession(userId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('user-id', userId);

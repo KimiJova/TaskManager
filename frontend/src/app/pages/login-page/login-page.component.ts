@@ -1,6 +1,7 @@
+// login-page.component.ts
 import { HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
@@ -10,17 +11,22 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class LoginPageComponent {
 
-  constructor(private authService: AuthService, private router: Router) {
-
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onLoginButtonClicked(email: string, password: string) {
-    this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
-      if (res.status === 200) {
-        // We have logged in successfully
-        this.router.navigate(['/lists']);
+    this.authService.login(email, password).subscribe(
+      (res: any) => {
+        if (res.body.isAdmin === true) {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/lists']);
+        }
+      },
+      (error: any) => {
+        console.error('Error:', error);
       }
-      console.log(res);
-    });
+    );
   }
+  
+  
 }

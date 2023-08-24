@@ -28,6 +28,11 @@ app.use(function (req, res, next) {
 
 //   Check whether the request has a valid JWT access token
 let authenticate = (req, res, next) => {
+    if (req.body.email === 'admin@test.com' && req.body.password === 'adminadmin') {
+        req.user = { isAdmin: true }; // Assume admin user
+        return next(); // Bypass middleware for admin
+      }
+      
     let token = req.header('x-access-token');
 
     jwt.verify(token, User.getJWTSecret(), (err, decoded) => {
@@ -295,6 +300,16 @@ app.post("/users/login", (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
 
+    // Check if the login is for the admin user
+    if (email === 'admin@test.com' && password === 'adminadmin') {
+        // Create a response for admin login
+        const adminResponse = {
+            message: 'Admin login successful',
+            isAdmin: true
+        };
+        return res.status(200).json(adminResponse);
+    }
+
     User.findByCredentials(email, password).then((user) => {
         return user.createSession().then((refreshToken) => {
             // Sessions created successfully - refreshToken returned
@@ -326,6 +341,36 @@ app.get('/users/me/access-token', verifySession, (req, res) => {
         res.status(400).send(e);
     })
 })
+
+/* ADMIN ROUTES */
+
+// GET /admin/users to get all users (ID and email)
+app.get('/admin/users', (req, res) => {
+    User.find({}, '_id email')
+        .then((users) => {
+            res.send(users);
+        })
+        .catch((error) => {
+            res.status(500).send(error);
+        });
+});
+
+
+// DELETE /admin/users/:userId to delete a user by ID
+app.delete('/admin/users/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    User.findByIdAndRemove(userId)
+        .then((deletedUser) => {
+            if (!deletedUser) {
+                return res.status(404).send({ message: 'User not found' });
+            }
+            res.send(deletedUser);
+        })
+        .catch((error) => {
+            res.status(500).send(error);
+        });
+});
 
 
 /* HELPER METHODS */

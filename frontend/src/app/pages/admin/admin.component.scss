@@ -1,0 +1,49 @@
+.centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  
+    .white-box {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: 80%; /* Adjust the width as needed */
+      max-width: 800px; /* Adjust the max-width as needed */
+      padding: 20px;
+      margin: 0 auto;
+  
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+  
+      table {
+        width: 100%;
+        margin-top: 20px;
+  
+        th,
+        td {
+          padding: 10px;
+          text-align: left;
+        }
+  
+        th {
+          background-color: #f5f5f5;
+        }
+  
+        tr:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+  
+        button {
+          margin: 0;
+        }
+      }
+  
+      .has-text-centered {
+        text-align: center;
+      }
+    }
+  }
+  

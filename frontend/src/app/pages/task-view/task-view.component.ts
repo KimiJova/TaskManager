@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 import { List } from 'src/app/models/list.model';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/task.service';
@@ -16,7 +17,7 @@ export class TaskViewComponent implements OnInit {
   selectedListId: any;
   
   constructor(private taskService: TaskService, private route: ActivatedRoute, private elRef: ElementRef, 
-    private router: Router) { }
+    private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     console.log('TaskViewComponent initialized');
@@ -72,6 +73,12 @@ export class TaskViewComponent implements OnInit {
       console.log(res)
     });
   }
+
+  onLogoutClick() {
+    this.authService.logout();
+  }
+
+
 
   
 

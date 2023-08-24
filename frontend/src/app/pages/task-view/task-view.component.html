@@ -31,6 +31,9 @@
                         </div>
                         <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                             <div class="dropdown-content">
+                                <a (click)="onLogoutClick()" class="dropdown-item">
+                                    Logout
+                                  </a>
                                 <a [routerLink] = "['/edit-list/', selectedListId]" class="dropdown-item">
                                   Edit
                                 </a>
